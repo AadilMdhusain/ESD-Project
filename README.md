@@ -28,4 +28,4 @@ The Model/Entity Layer is represents the database/data structures and domain obj
 ## Frontend -  
 
 # 3. Authentication and LogIn -  
-We implement authentication in our Project with the help of JWT tokens. 
+We implement authentication in our Project with the help of JWT tokens. JWT tokens are used for secure authentication and authorization. JWT is a compace, URL safe token that can securely transmit and information between parties as a JSON object. These tokens are verified and are used to grant access to protected resources. The user enters their credentials and sends a POST request to the backend of our API. The backend returns a JWT token on successful authentication which is stored securely in the frontend of our Project. If the tokens expire, the frontend redirects the user to the login page or provides a refresh mechanism. 
