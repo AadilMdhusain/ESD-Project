@@ -29,3 +29,10 @@ The Model/Entity Layer is represents the database/data structures and domain obj
 
 # 3. Authentication and LogIn -  
 We implement authentication in our Project with the help of JWT tokens. JWT tokens are used for secure authentication and authorization. JWT is a compace, URL safe token that can securely transmit and information between parties as a JSON object. These tokens are verified and are used to grant access to protected resources. The user enters their credentials and sends a POST request to the backend of our API. The backend returns a JWT token on successful authentication which is stored securely in the frontend of our Project. If the tokens expire, the frontend redirects the user to the login page or provides a refresh mechanism. 
+
+# 4. Database Design -
+We have created four entities for our backend. Those entities are **Departments**, **EmployeeAccounts**, **Employees** and **EmployeeSalary** which corresponds to the four table we will work with-  
+* Departments - {department_id, capacity, name, department}
+* EmployeeAccounts - {employee_id, balance}
+* Employees - {first_name, last_name, email, title, salary, photograph_path, password, department}
+* EmployeeSalary - {id, employee_id, payment_date, amount, description}
