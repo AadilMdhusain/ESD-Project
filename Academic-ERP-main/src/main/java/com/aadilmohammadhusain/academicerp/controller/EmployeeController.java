@@ -4,7 +4,9 @@ import com.aadilmohammadhusain.academicerp.dto.employee.EmployeeRequest;
 import com.aadilmohammadhusain.academicerp.dto.employee.EmployeeResponse;
 import com.aadilmohammadhusain.academicerp.dto.employee.EmployeeSalaryRequest;
 import com.aadilmohammadhusain.academicerp.dto.employee.UpdateSalaryRequest;
-import com.mohitmarfatia.academicerp.dto.employee.*;
+import com.aadilmohammadhusain.academicerp.dto.employee.*;
+import com.aadilmohammadhusain.academicerp.exception.ResourceNotFoundException;
+import com.aadilmohammadhusain.academicerp.exception.BadRequestException;
 import com.aadilmohammadhusain.academicerp.helper.JWTHelper;
 import com.aadilmohammadhusain.academicerp.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -29,9 +31,13 @@ public class EmployeeController {
 
     @GetMapping()
     public ResponseEntity<List<EmployeeResponse>> getEmployees(@RequestHeader(name="Authorization") String authToken) {
+        try {
         String token = authToken.split(" ")[1].trim();
         Long id = jwtHelper.extractUserId(token);
-        return ResponseEntity.ok(employeeService.getAllEmployees(id));
+        return ResponseEntity.ok(employeeService.getAllEmployees(id));}
+        catch( Exception e){
+            throw new ResourceNotFoundException("No employees found or invalid token.");
+        }
     }
 
     @PostMapping()
@@ -41,7 +47,7 @@ public class EmployeeController {
             String result = employeeService.addEmployeeSalary(employeeSalaryRequest.employeeIds());
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error adding salary: " + e.getMessage());
+            throw new BadRequestException("Error adding salary: " + e.getMessage());
         }
     }
 
